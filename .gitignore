@@ -21,10 +21,6 @@ kubeconfig
 
 # Archivos del sistema operativo
 .DS_Store
-
-# Ignorar archivos de documentación
-COMMANDS.md
-PROJECT-STRUCTURE.md
 Thumbs.db
 desktop.ini
 
