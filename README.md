@@ -436,19 +436,6 @@ aws eks describe-clusters --region us-east-1
 
 ---
 
-## 🎯 Lo que Aprendes
-
-✅ **Docker**: Crear imágenes personalizadas y optimizadas  
-✅ **AWS ECR**: Registry privado para containerización empresarial  
-✅ **Kubernetes**: Orquestación, deployments, services, ingress  
-✅ **Traefik**: Ingress controller moderno y flexible  
-✅ **Terraform**: IaC para reproducibilidad y control de versiones  
-✅ **DevOps**: Automatización de build, push, deploy  
-✅ **Networking**: VPC, subnets, load balancing, DNS  
-✅ **High Availability**: Múltiples replicas en múltiples nodos  
-
----
-
 <div align="center">
 
 **⭐ Si este lab te fue útil, considera darle una estrella**
