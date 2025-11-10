@@ -70,7 +70,7 @@ graph TB
             IGW["🚪 Internet Gateway"]
 
             %% Subnets en paralelo (compartidas por EKS)
-            subgraph PublicSubnets["🔷 Public Subnets<br/>10.0.0.0/24 & 10.0.1.0/24"]
+            subgraph PublicSubnets["🔷 Public Subnets"]
                 direction LR
                 Subnet1["Public Subnet 1<br/>AZ-a"]
                 Subnet2["Public Subnet 2<br/>AZ-b"]
@@ -111,7 +111,10 @@ graph TB
     %% Flujo de tráfico
     Internet -->|HTTP port 80| NLB
     NLB --> IGW
-    IGW --> Traefik
+    IGW --> Subnet1
+    IGW --> Subnet2
+    Subnet1 --> Traefik
+    Subnet2 --> Traefik
 
     Traefik --> Ingress
     Ingress --> Service1
@@ -134,6 +137,7 @@ graph TB
     style Service1 fill:#FFD700,color:#000,stroke:#000,stroke-width:2px
     style Service2 fill:#FFD700,color:#000,stroke:#000,stroke-width:2px
     style ECR fill:#FF9900,color:#000,stroke:#000,stroke-width:2px
+
 
 
 
