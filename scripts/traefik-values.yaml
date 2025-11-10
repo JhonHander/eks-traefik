@@ -1,0 +1,61 @@
+# Traefik Helm Values para AWS EKS
+# Este archivo configura Traefik para crear un único AWS Load Balancer
+
+# Configuración del servicio - Crea el Load Balancer en AWS
+service:
+  enabled: true
+  type: LoadBalancer
+  annotations:
+    # Usar Network Load Balancer (NLB) de AWS
+    service.beta.kubernetes.io/aws-load-balancer-type: "nlb"
+    # Esquema del Load Balancer (internet-facing para acceso público)
+    service.beta.kubernetes.io/aws-load-balancer-scheme: "internet-facing"
+
+# Configuración de puertos
+ports:
+  web:
+    port: 80
+    exposedPort: 80
+    protocol: TCP
+  websecure:
+    port: 443
+    exposedPort: 443
+    protocol: TCP
+
+# Habilitar el Dashboard de Traefik (opcional, útil para debugging)
+ingressRoute:
+  dashboard:
+    enabled: true
+    # Exponer el dashboard en /dashboard
+    matchRule: PathPrefix(`/dashboard`) || PathPrefix(`/api`)
+    entryPoints: ["web"]
+
+# Providers - Kubernetes Ingress
+providers:
+  kubernetesIngress:
+    enabled: true
+    publishedService:
+      enabled: true
+  kubernetesCRD:
+    enabled: true
+
+# Logs
+logs:
+  general:
+    level: INFO
+  access:
+    enabled: true
+
+# Recursos del pod (ajusta según necesites)
+resources:
+  requests:
+    cpu: "100m"
+    memory: "128Mi"
+  limits:
+    cpu: "300m"
+    memory: "256Mi"
+
+# IngressClass - Importante para que reconozca los Ingress
+ingressClass:
+  enabled: true
+  isDefaultClass: true

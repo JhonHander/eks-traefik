@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>App 1 - EKS Lab</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 600px;
+            width: 100%;
+            text-align: center;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            color: #667eea;
+            margin-bottom: 20px;
+            font-size: 2.5em;
+        }
+
+        .badge {
+            background: #667eea;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            display: inline-block;
+            margin: 20px 0;
+            font-size: 1.2em;
+        }
+
+        .info {
+            background: #f7f7f7;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            text-align: left;
+        }
+
+        .info-item {
+            padding: 10px 0;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .info-item:last-child {
+            border-bottom: none;
+        }
+
+        .label {
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .emoji {
+            font-size: 3em;
+            margin: 20px 0;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .footer {
+            color: #666;
+            margin-top: 20px;
+            font-size: 0.9em;
+        }
+
+        .version {
+            background: #e0e7ff;
+            color: #667eea;
+            padding: 5px 15px;
+            border-radius: 15px;
+            display: inline-block;
+            margin: 10px 0;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="emoji">🚀</div>
+        <h1>Aplicación 1</h1>
+        <div class="badge">Traefik + EKS + Docker + ECR</div>
+        <div class="version">v1.0.0</div>
+
+        <div class="info">
+            <div class="info-item">
+                <span class="label">🏷️ Servicio:</span> App1-Service
+            </div>
+            <div class="info-item">
+                <span class="label">🐳 Contenedor:</span> Docker Custom Image
+            </div>
+            <div class="info-item">
+                <span class="label">📦 Registry:</span> Amazon ECR
+            </div>
+            <div class="info-item">
+                <span class="label">🖥️ Hostname:</span> <span id="hostname">Loading...</span>
+            </div>
+            <div class="info-item">
+                <span class="label">⏰ Timestamp:</span> <span id="time"></span>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>
+                🎯 Aplicación construida con Docker<br>
+                📤 Subida a Amazon ECR<br>
+                ☸️ Desplegada en Amazon EKS<br>
+                🔀 Enrutada con Traefik Ingress
+            </p>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('hostname').textContent = window.location.hostname;
+
+        function updateTime() {
+            const now = new Date();
+            document.getElementById('time').textContent = now.toLocaleString('es-ES', {
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit'
+            });
+        }
+
+        updateTime();
+        setInterval(updateTime, 1000);
+    </script>
+</body>
+
+</html>

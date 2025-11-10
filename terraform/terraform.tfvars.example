@@ -1,0 +1,12 @@
+# Ejemplo de archivo de variables
+# Copia este archivo a terraform.tfvars y ajusta los valores según necesites
+
+# aws_region = "us-east-1"
+# environment = "lab"
+# cluster_name = "eks-traefik-lab"
+# kubernetes_version = "1.31"
+# vpc_cidr = "10.0.0.0/16"
+# node_instance_types = ["t3.medium"]
+# node_desired_size = 2
+# node_min_size = 1
+# node_max_size = 3

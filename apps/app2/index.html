@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>App 2 - EKS Lab</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 600px;
+            width: 100%;
+            text-align: center;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            color: #f5576c;
+            margin-bottom: 20px;
+            font-size: 2.5em;
+        }
+
+        .badge {
+            background: #f5576c;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            display: inline-block;
+            margin: 20px 0;
+            font-size: 1.2em;
+        }
+
+        .counter {
+            font-size: 4em;
+            color: #f5576c;
+            margin: 20px 0;
+            font-weight: bold;
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        .info {
+            background: #f7f7f7;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            text-align: left;
+        }
+
+        .info-item {
+            padding: 10px 0;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .info-item:last-child {
+            border-bottom: none;
+        }
+
+        .label {
+            font-weight: bold;
+            color: #f5576c;
+        }
+
+        .emoji {
+            font-size: 3em;
+            margin: 20px 0;
+            animation: rotate 3s linear infinite;
+        }
+
+        @keyframes rotate {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .footer {
+            color: #666;
+            margin-top: 20px;
+            font-size: 0.9em;
+        }
+
+        .version {
+            background: #ffe0e6;
+            color: #f5576c;
+            padding: 5px 15px;
+            border-radius: 15px;
+            display: inline-block;
+            margin: 10px 0;
+            font-size: 0.9em;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        .stat-box {
+            background: #ffe0e6;
+            padding: 15px;
+            border-radius: 10px;
+            color: #f5576c;
+        }
+
+        .stat-number {
+            font-size: 2em;
+            font-weight: bold;
+        }
+
+        .stat-label {
+            font-size: 0.8em;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="emoji">🎯</div>
+        <h1>Aplicación 2</h1>
+        <div class="badge">Traefik + EKS + Docker + ECR</div>
+        <div class="version">v1.0.0</div>
+
+        <div class="counter" id="counter">0</div>
+
+        <div class="stats">
+            <div class="stat-box">
+                <div class="stat-number" id="visits">0</div>
+                <div class="stat-label">Visitas</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number" id="uptime">0s</div>
+                <div class="stat-label">Uptime</div>
+            </div>
+        </div>
+
+        <div class="info">
+            <div class="info-item">
+                <span class="label">🏷️ Servicio:</span> App2-Service
+            </div>
+            <div class="info-item">
+                <span class="label">🐳 Contenedor:</span> Docker Custom Image
+            </div>
+            <div class="info-item">
+                <span class="label">📦 Registry:</span> Amazon ECR
+            </div>
+            <div class="info-item">
+                <span class="label">🖥️ Hostname:</span> <span id="hostname">Loading...</span>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>
+                🎯 Aplicación interactiva con contador<br>
+                📤 Construida y subida desde tu local<br>
+                ☸️ Orquestada por Kubernetes + Traefik
+            </p>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('hostname').textContent = window.location.hostname;
+
+        // Contador principal
+        let count = 0;
+        setInterval(() => {
+            count++;
+            document.getElementById('counter').textContent = count;
+            document.getElementById('uptime').textContent = count + 's';
+        }, 1000);
+
+        // Visitas
+        let visits = parseInt(localStorage.getItem('app2-visits') || '0') + 1;
+        localStorage.setItem('app2-visits', visits);
+        document.getElementById('visits').textContent = visits;
+    </script>
+</body>
+
+</html>
