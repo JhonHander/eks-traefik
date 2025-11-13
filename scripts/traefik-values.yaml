@@ -22,7 +22,7 @@ ports:
     exposedPort: 443
     protocol: TCP
 
-# Habilitar el Dashboard de Traefik (opcional, útil para debugging)
+# Habilitar el Dashboard de Traefik
 ingressRoute:
   dashboard:
     enabled: true
@@ -46,7 +46,7 @@ logs:
   access:
     enabled: true
 
-# Recursos del pod (ajusta según necesites)
+# Recursos del pod
 resources:
   requests:
     cpu: "100m"
